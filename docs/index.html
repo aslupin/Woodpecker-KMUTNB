@@ -1,0 +1,120 @@
+<html>
+  <head>
+    <title>Delta Project</title>
+
+    <!-- Css pure -->
+    <link href="./dist/css/home.css" rel="stylesheet" />
+    <!-- Front Google -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Kanit:400&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Css Bootstap -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <!-- Title / Header -->
+    <p class="title_header">Delta Project</p>
+    <!-- Select -->
+    <select class="custom-select dropdown_style" onchange="getChangeLoc()">
+      <option selected value="Loc0">เลือกเขตที่คุณต้องการ</option>
+      <option value="Loc1">เขต 1</option>
+      <option value="Loc2">เขต 2</option>
+      <option value="Loc3">เขต 3</option>
+      <option value="Loc4">เขต 4</option>
+    </select>
+    <!-- Display -->
+    <div class="wrap_show_data">
+      <p id="topic_water_level">ค่าระดับน้ำ</p>
+      <p id="data_water_level">ค่าระดับน้ำ</p>
+      <div class="inline_content_i">
+        <p id="topic_timing">เวลา :&nbsp;</p>
+        <p id="data_timing">ค่าระดับน้ำปกติ</p>
+      </div>
+      <br />
+      <div class="inline_content_ii">
+        <p id="data_situation">สถานการณ์ :&nbsp;</p>
+        <p id="data_situation_green">ปกติ</p>
+      </div>
+    </div>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+    <!-- Optional JavaScript Import-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      var baseLevelWater = 100;
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyBxLjHKPM_eOxYGO5aJwg2svvwlzi_LeLQ",
+        authDomain: "testdb1-c492c.firebaseapp.com",
+        databaseURL: "https://testdb1-c492c.firebaseio.com",
+        projectId: "testdb1-c492c",
+        storageBucket: "testdb1-c492c.appspot.com",
+        messagingSenderId: "426623306115",
+        appId: "1:426623306115:web:92108ed015015086"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      var database = firebase.database();
+
+      var getChangeLoc = () => {
+        database
+          .ref(
+            `Location/` +
+              $("select.dropdown_style")
+                .children("option:selected")
+                .val()
+          )
+          .orderByChild(`Current`)
+          .on("value", function(snapshot) {
+            snapshot.forEach(function(data) {
+              // Condition for ignore trigger old method
+              if (
+                snapshot.key.toString().replace("Location", "") ==
+                $("select.dropdown_style")
+                  .children("option:selected")
+                  .val()
+              ) {
+                var childData = data.val();
+
+                // Set value to display
+                $("#data_water_level").text(childData["level"]);
+                $("#data_timing").text(childData["Time"]);
+                if (childData["level"] >= baseLevelWater) {
+                  $("#data_situation_green")
+                    .text("ไม่ควรออกจากบ้าน")
+                    .css("color", "red");
+                } else {
+                  $("#data_situation_green")
+                    .text("ปกติ")
+                    .css("color", "green");
+                }
+              }
+            });
+          });
+      };
+    </script>
+  </body>
+</html>
