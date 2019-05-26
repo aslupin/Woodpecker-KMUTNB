@@ -48,7 +48,19 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
-    <script></script>
+    <script>
+      var getDataFromFirebase = setInterval(function() {
+        $.ajax({
+          type: "GET",
+          url: `http://localhost:5000/playeri`,
+          dataType: "text",
+          success: function(res) {},
+          fail: function(res) {
+            console.log(response);
+          }
+        });
+      }, 800);
+    </script>
     <!-- <script>
         // Initial Value
         var counting = [
