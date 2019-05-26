@@ -10,13 +10,13 @@ mongoose
   .connect(
     "mongodb+srv://PM_KMUTNB:" +
       process.env.MONGO_ATLAS_PW +
-      "@powermonitor-ofikh.mongodb.net/PM?retryWrites=true",
+      "@powermonitor-ofikh.mon  godb.net/PM?retryWrites=true",
     { useCreateIndex: true, useNewUrlParser: true }
   )
   .then(() => {
     console.log("Connected to database");
   })
-  .catch((err) => {
+  .catch(err => {
     console.log(err);
     console.log("Connection failed");
   });

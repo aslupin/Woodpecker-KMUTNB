@@ -1,0 +1,46 @@
+body {
+  margin: 0 auto !important;
+  text-align: center !important;
+  width: 100% !important;
+  font-family: "Kanit", sans-serif !important;
+  font-size: 35px !important;
+}
+
+.dropdown_style {
+  font-size: 18px !important;
+  height: 52px !important;
+  border-width: 0.85px !important;
+  border-color: peru !important;
+  color: peru !important;
+  width: 400px !important;
+}
+
+.title_header {
+  padding-top: 40px;
+  padding-bottom: 20px;
+  font-weight: bold;
+  font-size: 46px;
+}
+.wrap_show_data {
+  padding-top: 80px;
+  width: 500px;
+  margin: 0 auto;
+  /* background-color: bisque; */
+}
+#data_water_level {
+  font-size: 76px;
+  font-weight: bold;
+}
+
+#data_timing {
+  font-size: 17px;
+  color: goldenrod;
+  margin-top: -25px;
+  margin-right: -205px;
+}
+
+#data_situation {
+  font-size: 15px;
+  margin-top: -15px;
+  margin-right: -235px;
+}
