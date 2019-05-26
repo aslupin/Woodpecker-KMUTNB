@@ -102,6 +102,7 @@
                 // Set value to display
                 $("#data_water_level").text(childData["level"]);
                 $("#data_timing").text(childData["Time"]);
+
                 if (childData["level"] >= baseLevelWater) {
                   $("#data_situation_green")
                     .text("ไม่ควรออกจากบ้าน")
