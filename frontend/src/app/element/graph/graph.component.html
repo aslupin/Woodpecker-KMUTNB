@@ -1,0 +1,26 @@
+<mat-card>
+  <mat-toolbar color="primary">
+    <span>Graph </span>
+  </mat-toolbar>
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading" color="warn"></mat-progress-bar>
+  <div>
+    <div class="aa" style="display:block">
+      <canvas
+        baseChart
+        [datasets]="barChartData"
+        [labels]="barChartLebels"
+        [options]="barChartOptions"
+        [legend]="barChartLegend"
+        [chartType]="barChartType"
+      >
+      </canvas>
+    </div>
+  </div>
+  <br />
+  <mat-paginator
+    [length]="totalACs"
+    [pageSize]="ACsPerPage"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="onChangedPage($event)"
+  ></mat-paginator>
+</mat-card>
