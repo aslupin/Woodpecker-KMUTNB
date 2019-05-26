@@ -1,3 +1,4 @@
+/* @media (min-width: 601px) and (max-width: 1980px) { */
 body {
   margin: 0 auto !important;
   text-align: center !important;
@@ -77,8 +78,8 @@ body {
   margin-top: -50px;
   margin-right: 96px;
 }
-
-@media only screen and (max-width: 600px) {
+/* } */
+@media (min-width: 320px) and (max-width: 1067px) {
   body {
     margin: 0 auto !important;
     text-align: center !important;
