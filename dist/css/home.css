@@ -4,22 +4,27 @@ body {
   width: 100% !important;
   font-family: "Kanit", sans-serif !important;
   font-size: 35px !important;
+  min-width: 800px;
 }
 
 .dropdown_style {
-  font-size: 18px !important;
-  height: 52px !important;
+  font-size: 0.5em !important;
   border-width: 0.85px !important;
   border-color: peru !important;
   color: peru !important;
-  width: 400px !important;
+  /* width: 400px !important; */
+  /* height: 52px !important; */
+  width: 80% !important;
+  height: 3em !important;
+  min-width: 800px !important;
 }
 
 .title_header {
   padding-top: 40px;
   padding-bottom: 20px;
-  font-weight: bold;
-  font-size: 46px;
+  /* font-weight: bold; */
+  /* font-size: 46px; */
+  font-size: 2.8em;
 }
 .wrap_show_data {
   padding-top: 80px;
