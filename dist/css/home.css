@@ -79,7 +79,7 @@ body {
   margin-right: 96px;
 }
 /* } */
-@media (min-width: 320px) and (max-width: 1067px) {
+@media (min-width: 320px) and (max-width: 480px) {
   body {
     margin: 0 auto !important;
     text-align: center !important;
