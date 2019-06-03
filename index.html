@@ -40,7 +40,7 @@
       <br />
       <div class="inline_content_ii">
         <p id="data_situation">สถานการณ์ :&nbsp;</p>
-        <p id="data_situation_green">ปกติ</p>
+        <p id="data_situation_green" class="situation">ปกติ</p>
       </div>
     </div>
 
@@ -89,30 +89,30 @@
           )
           .orderByChild(`Current`)
           .on("value", function(snapshot) {
+            // console.log(snapshot.val());
             snapshot.forEach(function(data) {
               // Condition for ignore trigger old method
-              if (
-                snapshot.key.toString().replace("Location", "") ==
-                $("select.dropdown_style")
-                  .children("option:selected")
-                  .val()
-              ) {
-                var childData = data.val();
-
-                // Set value to display
-                $("#data_water_level").text(childData["level"]);
-                $("#data_timing").text(childData["Time"]);
-
-                if (childData["level"] >= baseLevelWater) {
-                  $("#data_situation_green")
-                    .text("ไม่ควรออกจากบ้าน")
-                    .css("color", "red");
-                } else {
-                  $("#data_situation_green")
-                    .text("ปกติ")
-                    .css("color", "green");
+              if (data.key == "Current")
+                if (
+                  snapshot.key.toString().replace("Location", "") ==
+                  $("select.dropdown_style")
+                    .children("option:selected")
+                    .val()
+                ) {
+                  var childData = data.val();
+                  // Set value to display
+                  $("#data_water_level").text(childData["level"]);
+                  $("#data_timing").text(childData["Time"]);
+                  if (Number(childData["level"]) >= baseLevelWater) {
+                    $(".situation")
+                      .text("ไม่ควรออกจากบ้าน")
+                      .css("color", "red");
+                  } else {
+                    $(".situation")
+                      .text("ปกติ")
+                      .css("color", "green");
+                  }
                 }
-              }
             });
           });
       };
