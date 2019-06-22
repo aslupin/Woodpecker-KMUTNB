@@ -22,28 +22,72 @@
     <!-- Title / Header -->
     <p class="title_header">Delta Project</p>
     <!-- Select -->
-    <select class="custom-select dropdown_style" onchange="getChangeLoc()">
-      <option selected value="Loc0">เลือกเขตที่คุณต้องการ</option>
-      <option value="Loc1">เขต 1</option>
-      <option value="Loc2">เขต 2</option>
-      <option value="Loc3">เขต 3</option>
-      <option value="Loc4">เขต 4</option>
-    </select>
-    <!-- Display -->
-    <div class="wrap_show_data">
-      <p id="topic_water_level">ค่าระดับน้ำ</p>
-      <p id="data_water_level">0</p>
-      <div class="inline_content_i">
-        <p id="topic_timing">เวลา :&nbsp;</p>
-        <p id="data_timing">0/0/0</p>
+    <div class="container">
+      <div class="left_container">
+        <select class="custom-select dropdown_style">
+          <option selected value="l0">เลือกเขตที่คุณต้องการ</option>
+          <option value="l1">เขต 1</option>
+        </select>
+
+        <select
+          class="custom-select dropdown_id dropdown_style"
+          onchange="getChangeLoc()"
+        >
+          <option selected value="Loc0">เลือกสถานีสูบน้ำ</option>
+          <option value="Loc1">สถานี 1</option>
+          <option value="Loc2">สถานี 2</option>
+          <!-- <option value="Loc3">สถานี 3</option>
+          <option value="Loc4">สถานี 4</option> -->
+        </select>
+        <!-- Display -->
+        <div class="wrap_show_data">
+          <p id="topic_water_level">ค่าระดับน้ำ</p>
+          <p id="data_water_level">0</p>
+          <div class="inline_content_i">
+            <p id="topic_timing">เวลา :&nbsp;</p>
+            <p id="data_timing">0/0/0</p>
+          </div>
+          <br />
+          <div class="inline_content_ii">
+            <p id="data_situation">สถานการณ์ :&nbsp;</p>
+            <p id="data_situation_green" class="situation">ปกติ</p>
+          </div>
+        </div>
       </div>
-      <br />
-      <div class="inline_content_ii">
-        <p id="data_situation">สถานการณ์ :&nbsp;</p>
-        <p id="data_situation_green" class="situation">ปกติ</p>
+      <div class="right_container">
+        <span>
+          <p class="topic_future">ข้อมูลน้ำในอนาคต</p>
+          <span class="date_rel">
+            <p>อัพเดท</p>
+            <p id="time_update">22/06/2019</p>
+          </span>
+        </span>
+        <span>
+          <p>ฝน :&nbsp;</p>
+          <p id="rain">55%</p>
+        </span>
+        <span>
+          <p>ปริมาณน้ำฝน :&nbsp;</p>
+          <p id="quantity_predic">2 ลบ.ซม.</p>
+        </span>
+        <span>
+          <p>ระดับน้ำสูงสุดของสถานี :&nbsp;</p>
+          <p id="max_water">13 ซม.</p>
+        </span>
+        <span>
+          <p>ระดับน้ำที่คาดว่าจะเพิ่ม :&nbsp;</p>
+          <p id="level_predic">13 ซม.</p>
+        </span>
+        <span>
+          <p>สรุปสถานการณ์น้ำในอนาคต :&nbsp;</p>
+          <p id="situation_predic">13 ซม.</p>
+        </span>
+        <span>
+          <p>ปริมาณน้ำที่เกิน :&nbsp;</p>
+          <p id="wateroutage_pred">13 ซม.</p>
+        </span>
       </div>
     </div>
-
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
@@ -83,26 +127,28 @@
         database
           .ref(
             `Location/` +
-              $("select.dropdown_style")
+              $("select.dropdown_id")
                 .children("option:selected")
                 .val()
           )
           .orderByChild(`Current`)
           .on("value", function(snapshot) {
-            // console.log(snapshot.val());
+            console.log(snapshot.val());
             snapshot.forEach(function(data) {
               // Condition for ignore trigger old method
-              if (data.key == "Current")
-                if (
-                  snapshot.key.toString().replace("Location", "") ==
-                  $("select.dropdown_style")
-                    .children("option:selected")
-                    .val()
-                ) {
+              // if (data.key == "Current")
+              if (
+                snapshot.key.toString().replace("Location", "") ==
+                $("select.dropdown_id")
+                  .children("option:selected")
+                  .val()
+              ) {
+                if (data.key == "Current") {
                   var childData = data.val();
                   // Set value to display
                   $("#data_water_level").text(childData["level"]);
                   $("#data_timing").text(childData["Time"]);
+
                   if (Number(childData["level"]) >= baseLevelWater) {
                     $(".situation")
                       .text("ไม่ควรออกจากบ้าน")
@@ -112,7 +158,17 @@
                       .text("ปกติ")
                       .css("color", "green");
                   }
+                } else if (data.key == "AreaDat") {
+                  var childData = data.val();
+                  console.log(childData);
+                  Object.keys(childData).map(function(key, index) {
+                    $("#" + key).text(childData[key]);
+                  });
+                  // childData.map(key => {
+
+                  // });
                 }
+              }
             });
           });
       };
