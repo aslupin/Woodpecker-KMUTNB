@@ -16,7 +16,7 @@ span.date_rel {
 }
 
 .left_container {
-  width: 60%;
+  width: 50%;
   text-align: center;
   /* background: red; */
 }
@@ -24,7 +24,7 @@ span.date_rel {
 .right_container {
   border-left: 2px solid rgb(154, 154, 154);
   font-size: 17px;
-  width: 40%;
+  width: 50%;
   padding-left: 30px;
   /* background: green; */
   text-align: left;

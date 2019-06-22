@@ -41,7 +41,7 @@
         </select>
         <!-- Display -->
         <div class="wrap_show_data">
-          <p id="topic_water_level">ค่าระดับน้ำ</p>
+          <p id="topic_water_level">ระดับน้ำในปัจจุบัน</p>
           <p id="data_water_level">0</p>
           <div class="inline_content_i">
             <p id="topic_timing">เวลา :&nbsp;</p>
@@ -151,7 +151,7 @@
 
                   if (Number(childData["level"]) >= baseLevelWater) {
                     $(".situation")
-                      .text("ไม่ควรออกจากบ้าน")
+                      .text("มีโอกาสเกิดน้ำท่วม")
                       .css("color", "red");
                   } else {
                     $(".situation")
@@ -162,7 +162,12 @@
                   var childData = data.val();
                   console.log(childData);
                   Object.keys(childData).map(function(key, index) {
-                    $("#" + key).text(childData[key]);
+                    if (key == "situation_predic") {
+                      if (childData[key] == "0") $("#" + key).text("ปกติ");
+                      else $("#" + key).text("มีโอกาสเกิดน้ำท่วม");
+                    } else {
+                      $("#" + key).text(childData[key]);
+                    }
                   });
                   // childData.map(key => {
 
