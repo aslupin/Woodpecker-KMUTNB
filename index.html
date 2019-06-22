@@ -153,10 +153,13 @@
                     $(".situation")
                       .text("มีโอกาสเกิดน้ำท่วม")
                       .css("color", "red");
+
+                    $("#data_water_level").css("color", "#e21414");
                   } else {
                     $(".situation")
                       .text("ปกติ")
                       .css("color", "green");
+                    $("#data_water_level").css("color", "black");
                   }
                 } else if (data.key == "AreaDat") {
                   var childData = data.val();
