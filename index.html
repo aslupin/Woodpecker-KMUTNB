@@ -18,72 +18,83 @@
     />
   </head>
 
-  <body>
+  <body
+    style="display:flex; flex-direction: column; justify-content: center;align-items: center;"
+  >
     <!-- Title / Header -->
     <p class="title_header">Woodpecker [KMUTNB]</p>
     <!-- Select -->
+    <button
+      type="button"
+      onclick="changeL()"
+      style="font-size:12px;display:flex;width: 150px;align-items: center;justify-content: center;"
+    >
+      <p class="op0">เลือกภาษา : ไทย</p>
+    </button>
+    <br />
+
     <div class="container">
       <div class="left_container">
         <select class="custom-select dropdown_style">
-          <option selected value="l0">เลือกเขตที่คุณต้องการ</option>
-          <option value="l1">เขต 1</option>
+          <option selected value="l0" class="op1">เลือกเขตที่คุณต้องการ</option>
+          <option value="l1" class="op2">เขต 1</option>
         </select>
 
         <select
           class="custom-select dropdown_id dropdown_style"
           onchange="getChangeLoc()"
         >
-          <option selected value="Loc0">เลือกสถานีสูบน้ำ</option>
-          <option value="Loc1">สถานี 1</option>
-          <option value="Loc2">สถานี 2</option>
+          <option selected value="Loc0" class="op3">เลือกสถานีสูบน้ำ</option>
+          <option value="Loc1" class="op4">สถานี 1</option>
+          <option value="Loc2" class="op5">สถานี 2</option>
           <!-- <option value="Loc3">สถานี 3</option>
           <option value="Loc4">สถานี 4</option> -->
         </select>
         <!-- Display -->
         <div class="wrap_show_data">
-          <p id="topic_water_level">ระดับน้ำในปัจจุบัน [cm]</p>
+          <p id="topic_water_level" class="op6">ระดับน้ำในปัจจุบัน [cm]</p>
           <p id="data_water_level">0</p>
           <div class="inline_content_i">
-            <p id="topic_timing">เวลา :&nbsp;</p>
+            <p id="topic_timing" class="op7">เวลา :&nbsp;</p>
             <p id="data_timing">0/0/0</p>
           </div>
           <br />
           <div class="inline_content_ii">
-            <p id="data_situation">สถานการณ์ :&nbsp;</p>
-            <p id="data_situation_green" class="situation">ปกติ</p>
+            <p id="data_situation" class="op8">สถานการณ์ :&nbsp;</p>
+            <p id="data_situation_green" class="situation op9">ปกติ</p>
           </div>
         </div>
       </div>
       <div class="right_container">
         <span>
-          <p class="topic_future">ข้อมูลน้ำในอนาคต</p>
+          <p class="topic_future op11">ข้อมูลน้ำในอนาคต</p>
           <span class="date_rel">
-            <p>อัพเดท</p>
+            <p class="op12">อัพเดท</p>
             <p id="Time">--/--/----</p>
           </span>
         </span>
         <span>
-          <p>ฝน :&nbsp;</p>
+          <p class="op13">ฝน :&nbsp;</p>
           <p id="rain"></p>
         </span>
         <span>
-          <p>ปริมาณน้ำฝน :&nbsp;</p>
+          <p class="op14">ปริมาณน้ำฝน :&nbsp;</p>
           <p id="quantity_predic"></p>
         </span>
         <span>
-          <p>ระดับน้ำสูงสุดของสถานี :&nbsp;</p>
+          <p class="op15">ระดับน้ำสูงสุดของสถานี :&nbsp;</p>
           <p id="max_water"></p>
         </span>
         <span>
-          <p>ระดับน้ำที่คาดว่าจะเพิ่ม :&nbsp;</p>
+          <p class="op16">ระดับน้ำที่คาดว่าจะเพิ่ม :&nbsp;</p>
           <p id="level_predic"></p>
         </span>
         <span>
-          <p>สรุปสถานการณ์น้ำในอนาคต :&nbsp;</p>
-          <p id="situation_predic"></p>
+          <p class="op17">สรุปสถานการณ์น้ำในอนาคต :&nbsp;</p>
+          <p id="situation_predic" class="op19"></p>
         </span>
         <span>
-          <p>ปริมาณน้ำที่เกิน :&nbsp;</p>
+          <p class="op20">ปริมาณน้ำที่เกิน :&nbsp;</p>
           <p id="wateroutage_pred"></p>
         </span>
       </div>
@@ -98,7 +109,7 @@
     <!-- Optional JavaScript Import-->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      src="https://cdnjs.cloudflare.com/ajax==/libs/popper.js/1.14.7/umd/popper.min.js"
       integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
       crossorigin="anonymous"
     ></script>
@@ -108,7 +119,56 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      var baseLevelWater = 100;
+      let textTH = [
+        "เลือกภาษา : ไทย",
+        "เลือกเขตที่คุณต้องการ",
+        "เขต 1",
+        "เลือกสถานีสูบน้ำ",
+        "สถานี 1",
+        "สถานี 2",
+        "ระดับน้ำในปัจจุบัน",
+        "เวลา : ",
+        "สถานการณ์ : ",
+        "ปกติ",
+        "มีโอกาสเกิดน้ำท่วม",
+        "ข้อมูลน้ำในอนาคต",
+        "อัพเดท",
+        "ฝน : ",
+        "ปริมาณน้ำฝน : ",
+        "ระดับน้ำสูงสุดของสถานี : ",
+        "ระดับน้ำสูงสุดที่คาดว่าจะเพิ่ม : ",
+        "สรุปสถานการณ์น้ำในอนาคต : ",
+        "ปกติ",
+        "มีโอกาสเกิดน้ำท่วม",
+        "ปริมาณน้ำที่เกิน : "
+      ];
+
+      let textEN = [
+        "Change language: EN",
+        "Select Area",
+        "Area A",
+        "Select Station",
+        "Station A",
+        "Station B",
+        "Current water level",
+        "Time : ",
+        "Situation : ",
+        "Normal",
+        "Flooding",
+        "Water prediction",
+        "updated",
+        "Rain : ",
+        "Amount of rain : ",
+        "Station max. level : ",
+        "Level will increase : ",
+        "Predicted situation : ",
+        "Normal",
+        "May be flooding",
+        "Water outage : "
+      ];
+      var isTH = true;
+
+      var baseLevelWater = 71;
       // Your web app's Firebase configuration
       var firebaseConfig = {
         apiKey: "AIzaSyBxLjHKPM_eOxYGO5aJwg2svvwlzi_LeLQ",
@@ -179,6 +239,38 @@
               }
             });
           });
+      };
+      var changeL = () => {
+        isTH = !isTH;
+        console.log(isTH);
+        if (isTH) {
+          for (var e = 0; e <= 20; e++) {
+            if (e == 9 && $(".op" + e).text() == "Flooding") {
+              $(".op" + e).text("มีโอกาสเกิดน้ำท่วม");
+            }
+            if (e == 19 && $(".op" + e).text() == "May be flooding") {
+              $(".op" + e).text("มีโอกาสเกิดน้ำท่วม");
+            }
+            if ($(".op" + e).text() == "normal") {
+              $(".op" + e).text("ปกติ");
+            }
+            if (e !== 9 && e !== 19) $(".op" + e).text(textTH[e]);
+          }
+        } else {
+          for (var e = 0; e <= 20; e++) {
+            if (e == 9 && $(".op" + e).text() == "มีโอกาสเกิดน้ำท่วม") {
+              $(".op" + e).text("Flooding");
+            }
+            if (e == 19 && $(".op" + e).text() == "มีโอกาสเกิดน้ำท่วม") {
+              $(".op" + e).text("May be flooding");
+            }
+            if ($(".op" + e).text() == "ปกติ") {
+              $(".op" + e).text("normal");
+            }
+            if (e !== 9 && e !== 19) $(".op" + e).text(textEN[e]);
+            console.log($(".op" + e).text());
+          }
+        }
       };
     </script>
   </body>
