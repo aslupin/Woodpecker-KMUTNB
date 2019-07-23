@@ -210,24 +210,48 @@
                   $("#data_timing").text(childData["Time"]);
 
                   if (Number(childData["level"]) >= baseLevelWater) {
-                    $(".situation")
-                      .text("มีโอกาสเกิดน้ำท่วม")
-                      .css("color", "red");
+                    if (isTH === true) {
+                      $(".situation")
+                        .text("มีโอกาสเกิดน้ำท่วม")
+                        .css("color", "red");
+                    } else {
+                      $(".situation")
+                        .text("Flooding")
+                        .css("color", "red");
+                    }
 
                     $("#data_water_level").css("color", "#e21414");
                   } else {
-                    $(".situation")
-                      .text("ปกติ")
-                      .css("color", "green");
-                    $("#data_water_level").css("color", "black");
+                    if (isTH === true) {
+                      $(".situation")
+                        .text("ปกติ")
+                        .css("color", "green");
+                      $("#data_water_level").css("color", "black");
+                    } else {
+                      $(".situation")
+                        .text("Normal")
+                        .css("color", "green");
+                      $("#data_water_level").css("color", "black");
+                    }
                   }
                 } else if (data.key == "AreaDat") {
                   var childData = data.val();
                   console.log(childData);
                   Object.keys(childData).map(function(key, index) {
                     if (key == "situation_predic") {
-                      if (childData[key] == "0") $("#" + key).text("ปกติ");
-                      else $("#" + key).text("มีโอกาสเกิดน้ำท่วม");
+                      if (childData[key] == "0") {
+                        if (isTH) {
+                          $("#" + key).text("ปกติ");
+                        } else {
+                          $("#" + key).text("Normal");
+                        }
+                      } else {
+                        if (isTH) {
+                          $("#" + key).text("มีโอกาสเกิดน้ำท่วม");
+                        } else {
+                          $("#" + key).text("May be flooding");
+                        }
+                      }
                     } else {
                       $("#" + key).text(childData[key]);
                     }
